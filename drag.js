@@ -5,15 +5,20 @@ function drag(id){
 	var disY = 0;
 	obj.onmousedown = function(ev){
 		var ev = ev || event;
-		disX = ev.clientX - this.offsetLeft;
-		disY = ev.clientY - this.offsetTop;
+		disX = ev.clientX - obj.offsetLeft;
+		disY = ev.clientY - obj.offsetTop;
 		
-		document.onmouseomove = function(ev){
+		document.onmousemove = function(ev){
 			var ev = ev || event;
 
 			obj.style.left = ev.clientX - disX +'px';
 			obj.style.top = ev.clientY - disY +'px';
 		}
+		document.onmouseup = function(){
+			document.onmousemove = document.onmouseup = null;
+		}
+
+		return false;
 	}
 }
 
